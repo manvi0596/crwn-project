@@ -8,7 +8,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middlewares = [];
 
-if (ProcessingInstruction.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development") {
   middlewares.push(logger);
 }
 
