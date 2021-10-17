@@ -8,7 +8,13 @@ const CollectionPreview = ({ title, items }) => {
   debugger;
   return (
     <div className="collection-preview">
-      <h1 className="title">{title.toUpperCase()}</h1>
+      <h1
+        style={{ cursor: "pointer" }}
+        onClick={() => (window.location.href = `/shop/${title.toLowerCase()}`)}
+        className="title"
+      >
+        {title.toUpperCase()}
+      </h1>
       <div className="preview">
         {items
           .filter((item, idx) => idx < 4)
