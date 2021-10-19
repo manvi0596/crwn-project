@@ -1,40 +1,33 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
-//provider -> connect -> state(store)
+const selectCart = state => state.cart;
 
-/// cart , state { user : userReducer , cart : cartReducer}
-
-// cartReducer -> cart Combine
-
-//humara cart hai
-//constant h , state.cart object h
-const selectCart = (state) => state.cart;
-// selectors ->
-// humare cart ke andar ke items
 export const selectCartItems = createSelector(
   [selectCart],
-  (cart) => cart.cartItems
+  cart => cart.cartItems
 );
 
 export const selectCartHidden = createSelector(
   [selectCart],
-  (cart) => cart.hidden
+  cart => cart.hidden
 );
 
-//  const variable = createSelector([array of selectors ] , ()=> return  would be stored in the variable)
 export const selectCartItemsCount = createSelector(
-  [selectCartItems], // selector -> selectCartItems
-  (cartItems) =>
+  [selectCartItems],
+  cartItems =>
     cartItems.reduce(
-      (accumalatedQuantity, CartItem) =>
-        accumalatedQuantity + CartItem.quantity,
+      (accumalatedQuantity, cartItem) =>
+        accumalatedQuantity + cartItem.quantity,
       0
     )
 );
-export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
-  cartItems.reduce(
-    (accumalatedQuantity, CartItem) =>
-      accumalatedQuantity + CartItem.quantity * CartItem.price,
-    0
-  )
+
+export const selectCartTotal = createSelector(
+  [selectCartItems],
+  cartItems =>
+    cartItems.reduce(
+      (accumalatedQuantity, cartItem) =>
+        accumalatedQuantity + cartItem.quantity * cartItem.price,
+      0
+    )
 );
